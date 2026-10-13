@@ -1,0 +1,2439 @@
+{
+  "schemaVersion": "1",
+  "targetFamily": "sql",
+  "target": "postgres",
+  "profileHash": "3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2",
+  "roots": {
+    "Collection": {
+      "model": "Collection",
+      "namespace": "public"
+    },
+    "Customer": {
+      "model": "Customer",
+      "namespace": "public"
+    },
+    "Notification": {
+      "model": "Notification",
+      "namespace": "public"
+    },
+    "Order": {
+      "model": "Order",
+      "namespace": "public"
+    },
+    "OrderItem": {
+      "model": "OrderItem",
+      "namespace": "public"
+    },
+    "Product": {
+      "model": "Product",
+      "namespace": "public"
+    },
+    "TrackingPoint": {
+      "model": "TrackingPoint",
+      "namespace": "public"
+    },
+    "User": {
+      "model": "User",
+      "namespace": "public"
+    },
+    "Visit": {
+      "model": "Visit",
+      "namespace": "public"
+    }
+  },
+  "domain": {
+    "namespaces": {
+      "public": {
+        "models": {
+          "Collection": {
+            "fields": {
+              "amount": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "customerId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "notes": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "paymentMethod": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/enum@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "typeName": "PaymentMethod"
+                  }
+                }
+              },
+              "userId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "customer": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "customerId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Customer",
+                  "namespace": "public"
+                }
+              },
+              "user": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "userId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "User",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "amount": {
+                  "column": "amount"
+                },
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "customerId": {
+                  "column": "customerId"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "notes": {
+                  "column": "notes"
+                },
+                "paymentMethod": {
+                  "column": "paymentMethod"
+                },
+                "userId": {
+                  "column": "userId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Collection"
+            }
+          },
+          "Customer": {
+            "fields": {
+              "address": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "balance": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "email": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "latitude": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "longitude": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "notes": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "phone": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "status": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/enum@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "typeName": "CustomerStatus"
+                  }
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "userId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "collections": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "customerId"
+                  ]
+                },
+                "to": {
+                  "model": "Collection",
+                  "namespace": "public"
+                }
+              },
+              "orders": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "customerId"
+                  ]
+                },
+                "to": {
+                  "model": "Order",
+                  "namespace": "public"
+                }
+              },
+              "user": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "userId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "User",
+                  "namespace": "public"
+                }
+              },
+              "visits": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "customerId"
+                  ]
+                },
+                "to": {
+                  "model": "Visit",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "address": {
+                  "column": "address"
+                },
+                "balance": {
+                  "column": "balance"
+                },
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "email": {
+                  "column": "email"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "latitude": {
+                  "column": "latitude"
+                },
+                "longitude": {
+                  "column": "longitude"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "notes": {
+                  "column": "notes"
+                },
+                "phone": {
+                  "column": "phone"
+                },
+                "status": {
+                  "column": "status"
+                },
+                "updatedAt": {
+                  "column": "updatedAt"
+                },
+                "userId": {
+                  "column": "userId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Customer"
+            }
+          },
+          "Notification": {
+            "fields": {
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "isRead": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "message": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "title": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "type": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/enum@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "typeName": "NotificationType"
+                  }
+                }
+              },
+              "userId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "user": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "userId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "User",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "isRead": {
+                  "column": "isRead"
+                },
+                "message": {
+                  "column": "message"
+                },
+                "title": {
+                  "column": "title"
+                },
+                "type": {
+                  "column": "type"
+                },
+                "userId": {
+                  "column": "userId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Notification"
+            }
+          },
+          "Order": {
+            "fields": {
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "customerId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "notes": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "status": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/enum@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "typeName": "OrderStatus"
+                  }
+                }
+              },
+              "total": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "userId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "customer": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "customerId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Customer",
+                  "namespace": "public"
+                }
+              },
+              "items": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "orderId"
+                  ]
+                },
+                "to": {
+                  "model": "OrderItem",
+                  "namespace": "public"
+                }
+              },
+              "user": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "userId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "User",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "customerId": {
+                  "column": "customerId"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "notes": {
+                  "column": "notes"
+                },
+                "status": {
+                  "column": "status"
+                },
+                "total": {
+                  "column": "total"
+                },
+                "updatedAt": {
+                  "column": "updatedAt"
+                },
+                "userId": {
+                  "column": "userId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Order"
+            }
+          },
+          "OrderItem": {
+            "fields": {
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "orderId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "price": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "productId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "quantity": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "order": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "orderId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Order",
+                  "namespace": "public"
+                }
+              },
+              "product": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "productId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Product",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "id": {
+                  "column": "id"
+                },
+                "orderId": {
+                  "column": "orderId"
+                },
+                "price": {
+                  "column": "price"
+                },
+                "productId": {
+                  "column": "productId"
+                },
+                "quantity": {
+                  "column": "quantity"
+                }
+              },
+              "namespaceId": "public",
+              "table": "OrderItem"
+            }
+          },
+          "Product": {
+            "fields": {
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "description": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "image": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "isActive": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "price": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "sku": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "stock": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              }
+            },
+            "relations": {
+              "orderItems": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "productId"
+                  ]
+                },
+                "to": {
+                  "model": "OrderItem",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "description": {
+                  "column": "description"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "image": {
+                  "column": "image"
+                },
+                "isActive": {
+                  "column": "isActive"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "price": {
+                  "column": "price"
+                },
+                "sku": {
+                  "column": "sku"
+                },
+                "stock": {
+                  "column": "stock"
+                },
+                "updatedAt": {
+                  "column": "updatedAt"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Product"
+            }
+          },
+          "TrackingPoint": {
+            "fields": {
+              "accuracy": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "latitude": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "longitude": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "userId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "user": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "userId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "User",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "accuracy": {
+                  "column": "accuracy"
+                },
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "latitude": {
+                  "column": "latitude"
+                },
+                "longitude": {
+                  "column": "longitude"
+                },
+                "userId": {
+                  "column": "userId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "TrackingPoint"
+            }
+          },
+          "User": {
+            "fields": {
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "email": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "isActive": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "password": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "phone": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "role": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/enum@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "typeName": "UserRole"
+                  }
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              }
+            },
+            "relations": {
+              "collections": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "userId"
+                  ]
+                },
+                "to": {
+                  "model": "Collection",
+                  "namespace": "public"
+                }
+              },
+              "customers": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "userId"
+                  ]
+                },
+                "to": {
+                  "model": "Customer",
+                  "namespace": "public"
+                }
+              },
+              "notifications": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "userId"
+                  ]
+                },
+                "to": {
+                  "model": "Notification",
+                  "namespace": "public"
+                }
+              },
+              "orders": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "userId"
+                  ]
+                },
+                "to": {
+                  "model": "Order",
+                  "namespace": "public"
+                }
+              },
+              "tracking": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "userId"
+                  ]
+                },
+                "to": {
+                  "model": "TrackingPoint",
+                  "namespace": "public"
+                }
+              },
+              "visits": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "userId"
+                  ]
+                },
+                "to": {
+                  "model": "Visit",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "email": {
+                  "column": "email"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "isActive": {
+                  "column": "isActive"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "password": {
+                  "column": "password"
+                },
+                "phone": {
+                  "column": "phone"
+                },
+                "role": {
+                  "column": "role"
+                },
+                "updatedAt": {
+                  "column": "updatedAt"
+                }
+              },
+              "namespaceId": "public",
+              "table": "User"
+            }
+          },
+          "Visit": {
+            "fields": {
+              "completedAt": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "customerId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "latitude": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "longitude": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/float8@1",
+                  "kind": "scalar"
+                }
+              },
+              "notes": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "startedAt": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/timestamp-string@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "status": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/enum@1",
+                  "kind": "scalar",
+                  "typeParams": {
+                    "typeName": "VisitStatus"
+                  }
+                }
+              },
+              "userId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "customer": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "customerId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Customer",
+                  "namespace": "public"
+                }
+              },
+              "user": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "userId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "User",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "completedAt": {
+                  "column": "completedAt"
+                },
+                "createdAt": {
+                  "column": "createdAt"
+                },
+                "customerId": {
+                  "column": "customerId"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "latitude": {
+                  "column": "latitude"
+                },
+                "longitude": {
+                  "column": "longitude"
+                },
+                "notes": {
+                  "column": "notes"
+                },
+                "startedAt": {
+                  "column": "startedAt"
+                },
+                "status": {
+                  "column": "status"
+                },
+                "userId": {
+                  "column": "userId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "Visit"
+            }
+          }
+        }
+      }
+    }
+  },
+  "storage": {
+    "namespaces": {
+      "public": {
+        "entries": {
+          "native_enum": {
+            "CustomerStatus": {
+              "kind": "postgres-enum",
+              "members": [
+                "ACTIVE",
+                "INACTIVE"
+              ],
+              "typeName": "CustomerStatus"
+            },
+            "NotificationType": {
+              "kind": "postgres-enum",
+              "members": [
+                "INFO",
+                "WARNING",
+                "SUCCESS"
+              ],
+              "typeName": "NotificationType"
+            },
+            "OrderStatus": {
+              "kind": "postgres-enum",
+              "members": [
+                "PENDING",
+                "CONFIRMED",
+                "DELIVERED",
+                "CANCELLED"
+              ],
+              "typeName": "OrderStatus"
+            },
+            "PaymentMethod": {
+              "kind": "postgres-enum",
+              "members": [
+                "CASH",
+                "BANK_TRANSFER",
+                "CARD"
+              ],
+              "typeName": "PaymentMethod"
+            },
+            "UserRole": {
+              "kind": "postgres-enum",
+              "members": [
+                "ADMIN",
+                "SALES_REP"
+              ],
+              "typeName": "UserRole"
+            },
+            "VisitStatus": {
+              "kind": "postgres-enum",
+              "members": [
+                "PLANNED",
+                "IN_PROGRESS",
+                "COMPLETED",
+                "CANCELLED"
+              ],
+              "typeName": "VisitStatus"
+            }
+          },
+          "table": {
+            "Collection": {
+              "columns": {
+                "amount": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": false
+                },
+                "createdAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "customerId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "notes": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "paymentMethod": {
+                  "codecId": "pg/enum@1",
+                  "dataType": "pg/enum",
+                  "nullable": false,
+                  "typeParams": {
+                    "typeName": "PaymentMethod"
+                  },
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "PaymentMethod",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "userId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "customerId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Collection"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Customer"
+                  }
+                },
+                {
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "userId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Collection"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "User"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "Customer": {
+              "columns": {
+                "address": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "balance": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "default": {
+                    "kind": "literal",
+                    "value": 0
+                  },
+                  "nullable": false
+                },
+                "createdAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "email": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "latitude": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": true
+                },
+                "longitude": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": true
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "notes": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "phone": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "status": {
+                  "codecId": "pg/enum@1",
+                  "dataType": "pg/enum",
+                  "default": {
+                    "kind": "literal",
+                    "value": "ACTIVE"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "typeName": "CustomerStatus"
+                  },
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "CustomerStatus",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "updatedAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "userId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "userId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Customer"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "User"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "Notification": {
+              "columns": {
+                "createdAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "isRead": {
+                  "codecId": "pg/bool@1",
+                  "dataType": "pg/bool",
+                  "default": {
+                    "kind": "literal",
+                    "value": false
+                  },
+                  "nullable": false
+                },
+                "message": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "title": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "type": {
+                  "codecId": "pg/enum@1",
+                  "dataType": "pg/enum",
+                  "default": {
+                    "kind": "literal",
+                    "value": "INFO"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "typeName": "NotificationType"
+                  },
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "NotificationType",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "userId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "userId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Notification"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "User"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "Order": {
+              "columns": {
+                "createdAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "customerId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "notes": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "status": {
+                  "codecId": "pg/enum@1",
+                  "dataType": "pg/enum",
+                  "default": {
+                    "kind": "literal",
+                    "value": "PENDING"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "typeName": "OrderStatus"
+                  },
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "OrderStatus",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "total": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": false
+                },
+                "updatedAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "userId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "customerId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Order"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Customer"
+                  }
+                },
+                {
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "userId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Order"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "User"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "OrderItem": {
+              "columns": {
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "orderId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                },
+                "price": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": false
+                },
+                "productId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                },
+                "quantity": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "orderId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "OrderItem"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Order"
+                  }
+                },
+                {
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "productId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "OrderItem"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Product"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "Product": {
+              "columns": {
+                "createdAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "description": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "image": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "isActive": {
+                  "codecId": "pg/bool@1",
+                  "dataType": "pg/bool",
+                  "default": {
+                    "kind": "literal",
+                    "value": true
+                  },
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "price": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": false
+                },
+                "sku": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "stock": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "kind": "literal",
+                    "value": 0
+                  },
+                  "nullable": false
+                },
+                "updatedAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "columns": [
+                    "sku"
+                  ],
+                  "name": "Product_sku_key",
+                  "unique": true
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "TrackingPoint": {
+              "columns": {
+                "accuracy": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": true
+                },
+                "createdAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "latitude": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": false
+                },
+                "longitude": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": false
+                },
+                "userId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "cascade",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "userId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "TrackingPoint"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "User"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "User": {
+              "columns": {
+                "createdAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "email": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "isActive": {
+                  "codecId": "pg/bool@1",
+                  "dataType": "pg/bool",
+                  "default": {
+                    "kind": "literal",
+                    "value": true
+                  },
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "password": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": false
+                },
+                "phone": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "role": {
+                  "codecId": "pg/enum@1",
+                  "dataType": "pg/enum",
+                  "default": {
+                    "kind": "literal",
+                    "value": "SALES_REP"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "typeName": "UserRole"
+                  },
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "UserRole",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "updatedAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [
+                {
+                  "columns": [
+                    "email"
+                  ],
+                  "name": "User_email_key",
+                  "unique": true
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "Visit": {
+              "columns": {
+                "completedAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "nullable": true,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "createdAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "default": {
+                    "expression": "now()",
+                    "kind": "function"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "customerId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nullable": false
+                },
+                "latitude": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": true
+                },
+                "longitude": {
+                  "codecId": "pg/float8@1",
+                  "dataType": "pg/float8",
+                  "nullable": true
+                },
+                "notes": {
+                  "codecId": "pg/text@1",
+                  "dataType": "pg/text",
+                  "nullable": true
+                },
+                "startedAt": {
+                  "codecId": "pg/timestamp-string@1",
+                  "dataType": "pg/timestamp",
+                  "nullable": true,
+                  "typeParams": {
+                    "precision": 3
+                  }
+                },
+                "status": {
+                  "codecId": "pg/enum@1",
+                  "dataType": "pg/enum",
+                  "default": {
+                    "kind": "literal",
+                    "value": "PLANNED"
+                  },
+                  "nullable": false,
+                  "typeParams": {
+                    "typeName": "VisitStatus"
+                  },
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "VisitStatus",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
+                "userId": {
+                  "codecId": "pg/int4@1",
+                  "dataType": "pg/int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "customerId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Visit"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Customer"
+                  }
+                },
+                {
+                  "onDelete": "restrict",
+                  "onUpdate": "cascade",
+                  "source": {
+                    "columns": [
+                      "userId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "Visit"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "User"
+                  }
+                }
+              ],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            }
+          },
+          "valueSet": {
+            "CustomerStatus": {
+              "kind": "valueSet",
+              "values": [
+                "ACTIVE",
+                "INACTIVE"
+              ]
+            },
+            "NotificationType": {
+              "kind": "valueSet",
+              "values": [
+                "INFO",
+                "WARNING",
+                "SUCCESS"
+              ]
+            },
+            "OrderStatus": {
+              "kind": "valueSet",
+              "values": [
+                "PENDING",
+                "CONFIRMED",
+                "DELIVERED",
+                "CANCELLED"
+              ]
+            },
+            "PaymentMethod": {
+              "kind": "valueSet",
+              "values": [
+                "CASH",
+                "BANK_TRANSFER",
+                "CARD"
+              ]
+            },
+            "UserRole": {
+              "kind": "valueSet",
+              "values": [
+                "ADMIN",
+                "SALES_REP"
+              ]
+            },
+            "VisitStatus": {
+              "kind": "valueSet",
+              "values": [
+                "PLANNED",
+                "IN_PROGRESS",
+                "COMPLETED",
+                "CANCELLED"
+              ]
+            }
+          }
+        },
+        "id": "public",
+        "kind": "postgres-schema"
+      }
+    },
+    "storageHash": "3a233ecc79d5880dedfb693cb5213ec531ca4474eb7d9bab387e0360f7bf8220"
+  },
+  "execution": {
+    "executionHash": "abbcec5fe847eda502b72b3b9de6c6b100ac03e43ba42f04cdfbdedb8d38d5b9",
+    "mutations": {
+      "defaults": [
+        {
+          "onCreate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "entry": "Customer",
+            "field": "updatedAt",
+            "namespace": "public"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "entry": "Order",
+            "field": "updatedAt",
+            "namespace": "public"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "entry": "Product",
+            "field": "updatedAt",
+            "namespace": "public"
+          }
+        },
+        {
+          "onCreate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "onUpdate": {
+            "id": "timestampNow",
+            "kind": "generator"
+          },
+          "ref": {
+            "entry": "User",
+            "field": "updatedAt",
+            "namespace": "public"
+          }
+        }
+      ]
+    }
+  },
+  "capabilities": {
+    "postgres": {
+      "distinctOn": true,
+      "forKeyShare": true,
+      "forNoKeyUpdate": true,
+      "jsonAgg": true,
+      "lateral": true,
+      "limit": true,
+      "orderBy": true,
+      "returning": true
+    },
+    "sql": {
+      "checkConstraint": true,
+      "defaultInInsert": true,
+      "enums": true,
+      "forShare": true,
+      "forUpdate": true,
+      "insertOnConflictSkip": true,
+      "insertOnConflictWithoutTarget": true,
+      "lateral": true,
+      "lockNowait": true,
+      "lockOf": true,
+      "lockSkipLocked": true,
+      "returning": true,
+      "scalarList": true
+    }
+  },
+  "extensions": {},
+  "meta": {},
+  "_generated": {
+    "warning": "⚠️  GENERATED FILE - DO NOT EDIT",
+    "message": "This file is automatically generated by \"prisma contract emit\".",
+    "regenerate": "To regenerate, run: prisma contract emit"
+  }
+}
